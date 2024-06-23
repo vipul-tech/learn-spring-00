@@ -1,5 +1,7 @@
 package com.vipul.learnspring.HelloWorld;
 
+import java.util.Arrays;
+
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.vipul.learnspring.HelloWorld.HelloWorldConfiguration.Address;
@@ -8,14 +10,14 @@ import com.vipul.learnspring.HelloWorld.HelloWorldConfiguration.Person;
 public class App02HelloWorldSpring {
 
 	public static void main(String[] args) {
-		//1. Launch a spring context
+		//1. Launch a spring context using configuration file
 		try(var context = 
 				new AnnotationConfigApplicationContext
 				(HelloWorldConfiguration.class);) {
 			
 			//2. Configure the things that we want spring to manage 
 			//HelloWorldConfiguration - @configuration
-			//name -@Bean
+			//name -@Bean (in HelloWorldConfiguration class)
 			
 			//3. Retrieving beans managed by spring
 			
@@ -34,6 +36,12 @@ public class App02HelloWorldSpring {
 			
 			System.out.println(context.getBean(Address.class));
 			
+			
+			//listing all beans that are managed by the spring container
+			System.out.println();
+			System.out.println("Listing all beans that are managed by the spring container....");
+			System.out.println();
+			Arrays.stream(context.getBeanDefinitionNames()).forEach(System.out::println);
 		}
 
 	}
